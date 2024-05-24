@@ -4,8 +4,8 @@ This IOT system logs each time that the motion sensor detects motion. The IOT sy
 web application which features the following:
   1) The list of timestamps that the motion detection detected
      - The list also has the following features:
-         a) Filter system to filter the list by date
-         b) Sorting system to sort the list ascending or descending according to the date and time
+         - Filter system to filter the list by date
+         - Sorting system to sort the list ascending or descending according to the date and time
   2) A bar graph that visualizes the motion detected per hour
 
 In the timestamp list, the user is able to **_delete_** entries.
@@ -17,5 +17,5 @@ In order to use the system, the user needs the following components:
   3) M to F Jumper Wires (at least 3)
   4) Micro-USB Cable
 
-Below is the components' architecture:
+Below is the IOT's architecture:
 ![componentss](https://github.com/CACabusas/itd103_casestudy2/assets/151438259/9f3ffbe7-9c43-4b89-b575-a121de538d0f)
