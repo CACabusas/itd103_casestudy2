@@ -2,10 +2,10 @@
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
 
-const char *ssid = "General Addor 2.4_plus";
-const char *password = "Addorvidad-63";
+const char *ssid = "SSID"; // Replace with your SSID
+const char *password = "Password"; // Replace with your internet password
 
-const char *serverUrl = "http://192.168.1.10:3001/motion/newmotion";
+const char *serverUrl = "http://ip_address:3001/motion/newmotion"; // Replace ip_address with your own (if using localhost)
 
 const int pirPin = D5;
 int pirState = LOW;
