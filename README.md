@@ -1,8 +1,11 @@
 # IOT System: *Simple Home Security System Using Motion Detection*
 
-This IOT system logs each time that the motion sensor detects motion. The IOT system comes with a barebones
+This IOT system logs each time that the motion sensor detects motion. The IOT system comes with barebones
 web application which features the following:
   1) The list of timestamps that the motion detection detected
+     - The list also has the following features:
+         a) Filter system to filter the list by date
+         b) Sorting system to sort the list ascending or descending according to the date and time
   2) A bar graph that visualizes the motion detected per hour
 
 In the timestamp list, the user is able to **_delete_** entries.
