@@ -22,9 +22,11 @@ function App() {
 
     ws.onmessage = (event) => {
       const newMotionEvent = JSON.parse(event.data);
-      setTimestamps(prevTimestamps => [...prevTimestamps, newMotionEvent]);
-      setFilteredDates(prevFilteredDates => [...prevFilteredDates, newMotionEvent]);
-      generateChartData([...timestamps, newMotionEvent]);
+      setTimestamps(prevTimestamps => {
+        const updatedTimestamps = [...prevTimestamps, newMotionEvent];
+        updateFilteredDatesAndChartData(updatedTimestamps);
+        return updatedTimestamps;
+      });
     };
 
     return () => ws.close();
@@ -36,23 +38,17 @@ function App() {
         console.log(res);
         // Update timestamps after deletion
         const updatedTimestamps = timestamps.filter(t => t._id !== id);
-        setTimestamps(updatedTimestamps);
-        setFilteredDates(updatedTimestamps);
-        generateChartData(updatedTimestamps);
+        updateFilteredDatesAndChartData(updatedTimestamps);
       })
       .catch(err => console.log(err));
   };
 
   const handleFilterChange = (e) => {
     setSelectedDate(e.target.value);
-    if (e.target.value) {
-      const filtered = timestamps.filter(t => new Date(t.timestamp).toDateString() === e.target.value);
-      setFilteredDates(filtered);
-      generateChartData(filtered);
-    } else {
-      setFilteredDates(timestamps);
-      generateChartData(timestamps);
-    }
+    const filtered = e.target.value
+      ? timestamps.filter(t => new Date(t.timestamp).toDateString() === e.target.value)
+      : timestamps;
+    updateFilteredDatesAndChartData(filtered);
   };
 
   const handleSortChange = (order) => {
@@ -73,6 +69,15 @@ function App() {
       count: counts[hour]
     }));
     setChartData(chartData);
+  };
+
+  const updateFilteredDatesAndChartData = (updatedTimestamps) => {
+    setTimestamps(updatedTimestamps);
+    const filtered = selectedDate
+      ? updatedTimestamps.filter(t => new Date(t.timestamp).toDateString() === selectedDate)
+      : updatedTimestamps;
+    setFilteredDates(filtered);
+    generateChartData(filtered);
   };
 
   const uniqueDates = [...new Set(timestamps.map(t => new Date(t.timestamp).toDateString()))];
